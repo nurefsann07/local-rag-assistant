@@ -94,10 +94,12 @@ if __name__ == "__main__":
 
         answer, sources = answer_query(query)
 
-        print(f"\nCevap: {answer}")
         print("\nKullanılan kaynaklar:")
+        seen_sources = set()
         for score, source, content in sources:
-            print(f"  - {source} (skor: {score:.3f})")
+            if source not in seen_sources:
+             print(f"  - {source} (en yüksek skor: {score:.3f})")
+             seen_sources.add(source)
         print()
 
     embedding_model.unload()
