@@ -1,0 +1,21 @@
+Phishing (Oltalama) Saldırısı Nedir?
+
+Phishing, saldırganların kendilerini güvenilir bir kurum veya kişi gibi göstererek, kullanıcıları kandırıp hassas bilgilerini (şifre, kredi kartı numarası, kimlik bilgileri) ele geçirmeye çalıştığı bir sosyal mühendislik saldırı türüdür.
+
+Nasıl Çalışır?
+
+Saldırgan genellikle e-posta, SMS veya sahte bir web sitesi aracılığıyla kurbana ulaşır. Mesaj, tanınmış bir bankadan, şirketten veya hizmetten geliyormuş gibi gösterilir. İçerikte genellikle aciliyet hissi yaratılır ("Hesabınız askıya alınacak", "Hemen giriş yapın" gibi), böylece kurban düşünmeden hareket eder.
+
+Yaygın Phishing Türleri:
+- E-posta phishing: Sahte kurumsal e-postalar yoluyla yapılan klasik yöntem
+- Spear phishing: Belirli bir kişi veya kuruma özel, kişiselleştirilmiş saldırı
+- Smishing: SMS üzerinden yapılan phishing
+- Vishing: Telefon araması yoluyla yapılan phishing
+
+Nasıl Korunulur?
+- Gönderenin e-posta adresini dikkatlice kontrol etmek
+- Linklere tıklamadan önce üzerine gelip gerçek adresi görmek
+- Kurumların asla e-posta ile şifre istemeyeceğini bilmek
+- Şüpheli mesajlarda, ilgili kurumu resmi kanaldan arayıp doğrulamak
+
+Phishing, teknik bir açıktan değil, insan davranışından faydalanan bir saldırı olduğu için, en iyi savunma farkındalık ve dikkattir.

@@ -1,0 +1,22 @@
+Zero-Day (Sıfırıncı Gün) Açığı Nedir?
+
+Zero-day açığı, bir yazılımda bulunan ama henüz geliştirici tarafından fark edilmemiş veya düzeltilmemiş güvenlik zafiyetidir. "Zero-day" (sıfırıncı gün) ismi, geliştiricinin bu açığı düzeltmek için "sıfır günü" olduğu, yani açığın bulunduğu anda henüz hiçbir yama (patch) olmadığı gerçeğinden gelir.
+
+Neden Tehlikelidir?
+
+Bir açık zero-day olarak bilindiğinde (yani sadece saldırgan tarafından biliniyorsa), kurbanın kendini koruyacak hiçbir resmi çözümü yoktur. Antivirüs yazılımları veya güvenlik duvarları bile bu saldırıyı tanımayabilir, çünkü daha önce görülmemiş bir yöntemdir.
+
+Zero-Day Süreci:
+1. Saldırgan (veya güvenlik araştırmacısı) bir açık keşfeder
+2. Eğer kötü niyetliyse, bu açığı kullanarak saldırı düzenler (zero-day exploit)
+3. Açık fark edilir (ya saldırı sırasında ya da araştırmacılar tarafından)
+4. Geliştirici bir yama (patch) yayınlar
+5. Kullanıcılar yamayı yükleyerek korunur
+
+Zero-Day Pazarı:
+İlginç bir şekilde, zero-day açıkları bazen büyük paralar karşılığında alınıp satılır — hem kötü niyetli gruplar hem de bazı güvenlik şirketleri veya devlet kurumları bu açıkları satın alabilir.
+
+Korunma Yöntemleri:
+- Yazılımları düzenli güncellemek (yama çıkar çıkmaz yüklemek)
+- Güvenlik katmanlarını (güvenlik duvarı, davranış tabanlı tespit sistemleri) kullanmak
+- Bilinmeyen tehditlere karşı "sıfır güven" (zero trust) yaklaşımını benimsemek

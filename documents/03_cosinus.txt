@@ -1,0 +1,14 @@
+Kosinüs Benzerliği (Cosine Similarity) Nedir?
+
+Kosinüs benzerliği, iki vektörün ne kadar "benzer" olduğunu ölçmek için kullanılan bir matematiksel yöntemdir. RAG sistemlerinde, embedding'e çevrilmiş metinleri karşılaştırmak için kullanılır.
+
+Mantığı şöyledir: iki vektörü, uzayda başlangıç noktasından çıkan iki ok gibi düşünebiliriz. Bu okların arasındaki açı ne kadar küçükse, vektörler o kadar benzer demektir.
+
+Kosinüs benzerliği sonucu genellikle -1 ile 1 arasında bir sayı olarak çıkar:
+- 1'e yakın değer: vektörler neredeyse aynı yöne bakıyor, yani anlamca çok benzer
+- 0'a yakın değer: vektörler birbirine dik, yani aralarında anlamlı bir ilişki yok
+- -1'e yakın değer: vektörler tamamen zıt yönlerde
+
+Neden Öklid mesafesi (iki nokta arasındaki düz çizgi uzaklığı) yerine kosinüs benzerliği kullanılır? Çünkü metin embedding'lerinde önemli olan vektörlerin "büyüklüğü" değil, "yönüdür". Bir cümlenin uzun ya da kısa olması vektörün büyüklüğünü etkileyebilir, ama asıl önemli olan o cümlenin hangi "anlam yönüne" işaret ettiğidir. Kosinüs benzerliği, büyüklüğü göz ardı edip sadece yöne (yani anlama) odaklanır.
+
+Bizim projede kullanımı: Kullanıcının sorusunu embedding'e çeviriyoruz, sonra bu embedding'i veritabanındaki her doküman parçasının embedding'i ile kosinüs benzerliği formülüyle karşılaştırıyoruz. En yüksek benzerlik skoruna sahip parçalar, kullanıcının sorusuyla en alakalı içerik olarak seçiliyor.

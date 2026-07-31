@@ -1,0 +1,21 @@
+Fine-Tuning (İnce Ayar) Nedir?
+
+Fine-tuning, önceden eğitilmiş (pre-trained) bir yapay zeka modelini, belirli bir görev veya veri seti üzerinde ek eğitimden geçirerek, o göreve özel olarak "uzmanlaştırma" işlemidir.
+
+Neden Fine-Tuning Yapılır?
+
+Büyük dil modelleri (LLM), genel amaçlı, devasa miktarda metinle eğitilir. Bu, modeli genel konularda iyi yapar ama belirli, özelleşmiş bir alanda (örneğin bir şirketin iç dokümanları, tıbbi terminoloji, hukuki metinler) yeterince iyi performans göstermeyebilir. Fine-tuning, modelin bu özel alana daha uyumlu hale gelmesini sağlar.
+
+Fine-Tuning ile RAG Arasındaki Fark:
+
+Bu ikisi sık karıştırılır ama farklı amaçlara hizmet eder:
+- Fine-tuning: Modelin kendi "davranışını" ve "bilgisini" kalıcı olarak değiştirir, yeniden eğitim gerektirir, maliyetlidir.
+- RAG: Modelin kendisini değiştirmez, sadece ona dışarıdan güncel/özel bilgi sağlar, daha esnek ve ucuzdur.
+
+Genellikle RAG, "bilgiyi güncel tutmak" için tercih edilirken, fine-tuning "modelin tarzını, formatını veya belirli bir görevdeki yeteneğini" geliştirmek için kullanılır. Bazı projelerde ikisi birlikte de kullanılabilir.
+
+Fine-Tuning Türleri:
+- Full fine-tuning: Modelin tüm parametrelerini güncelleme (çok maliyetli, büyük hesaplama gücü gerektirir)
+- LoRA (Low-Rank Adaptation) gibi verimli yöntemler: Modelin sadece küçük bir kısmını güncelleyerek, çok daha az kaynakla benzer sonuçlar elde etme
+
+Bu proje kapsamında fine-tuning yapmıyoruz (RAG kullanıyoruz), ama ikisinin farkını bilmek, hangi yöntemin ne zaman daha uygun olduğunu anlamak için önemlidir.

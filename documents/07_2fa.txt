@@ -1,0 +1,23 @@
+İki Faktörlü Kimlik Doğrulama (2FA) Nedir?
+
+İki faktörlü kimlik doğrulama (2FA - Two-Factor Authentication), bir hesaba giriş yaparken, sadece şifre değil, ikinci bir doğrulama adımı daha isteyerek güvenliği artıran bir yöntemdir.
+
+Neden Gerekli?
+
+Şifreler tek başına yeterince güvenli değildir — çalınabilir, tahmin edilebilir veya veri sızıntılarında ele geçirilebilir. 2FA, saldırganın şifreyi ele geçirse bile, ikinci faktör olmadan hesaba giriş yapamamasını sağlar.
+
+Doğrulama Faktör Türleri:
+Kimlik doğrulama genellikle üç kategoriye ayrılır:
+1. Bildiğin bir şey: şifre, PIN kodu
+2. Sahip olduğun bir şey: telefon, güvenlik anahtarı (fiziksel USB cihaz)
+3. Olduğun bir şey: parmak izi, yüz tanıma (biyometrik)
+
+2FA, bu kategorilerden en az ikisini birleştirir — genellikle "bildiğin bir şey" (şifre) ile "sahip olduğun bir şey" (telefon uygulaması, SMS kodu) kombinasyonu kullanılır.
+
+Yaygın 2FA Yöntemleri:
+- SMS ile gelen tek kullanımlık kod
+- Kimlik doğrulama uygulamaları (Google Authenticator, Microsoft Authenticator gibi) ile üretilen kod
+- Fiziksel güvenlik anahtarları (YubiKey gibi)
+- Push bildirimi ile onay isteme
+
+Önemli Not: SMS tabanlı 2FA, diğer yöntemlere göre daha az güvenli kabul edilir çünkü SIM takas (SIM swap) saldırılarına açıktır. Kimlik doğrulama uygulamaları veya fiziksel anahtarlar daha güvenli seçeneklerdir.

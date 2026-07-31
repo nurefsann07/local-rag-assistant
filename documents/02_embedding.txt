@@ -1,0 +1,11 @@
+Embedding ve Vektör Arama Nedir?
+
+Embedding, bir metnin (kelime, cümle veya paragraf) anlamını sayısal bir vektöre (sayı dizisine) dönüştürme işlemidir. Bu vektörler genellikle yüzlerce veya binlerce boyuttan oluşur ve metnin anlamsal özelliklerini temsil eder.
+
+Embedding'in temel mantığı şudur: anlamca birbirine yakın metinler, vektör uzayında da birbirine yakın konumlanır. Örneğin "kedi" ve "kedicik" kelimelerinin vektörleri birbirine çok yakın çıkarken, "kedi" ve "uçak" kelimelerinin vektörleri birbirinden uzak olur.
+
+Bu özellik, vektör arama (semantic search / anlamsal arama) yapmamızı sağlar. Klasik arama yöntemleri (anahtar kelime eşleştirme gibi) sadece birebir aynı kelimeleri arar. Vektör arama ise anlam benzerliğine bakar, bu yüzden farklı kelimelerle ifade edilmiş ama aynı anlama gelen içerikleri de bulabilir.
+
+İki vektörün ne kadar benzer olduğunu ölçmek için en yaygın yöntem cosine similarity (kosinüs benzerliği) hesabıdır. Bu yöntem, iki vektör arasındaki açıyı ölçer: açı küçükse benzerlik yüksek, açı büyükse benzerlik düşüktür. Sonuç genellikle -1 ile 1 arasında bir değer olarak ifade edilir, 1'e yakın değerler yüksek benzerlik anlamına gelir.
+
+RAG sistemlerinde embedding, "retrieval" (getirme) adımının temelini oluşturur: hem dokümanlar hem de kullanıcı sorusu embedding'e çevrilir, ardından en yakın embedding'lere sahip doküman parçaları bulunup modele bağlam olarak sunulur.

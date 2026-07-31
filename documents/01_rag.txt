@@ -1,0 +1,13 @@
+RAG (Retrieval-Augmented Generation) Nedir?
+
+RAG, bir yapay zeka dil modelinin (LLM) cevap üretirken, önceden depolanmış bir bilgi kaynağından ilgili bilgiyi bulup kullanmasını sağlayan bir tasarım yöntemidir. Türkçesi "Getirim ile Zenginleştirilmiş Üretim" olarak çevrilebilir.
+
+Normal bir dil modeli, sadece eğitildiği veriye dayanarak cevap üretir. Bu, modelin bilmediği ya da güncel olmayan konularda yanlış bilgi üretmesine (halüsinasyon) yol açabilir. RAG bu sorunu şöyle çözer:
+
+1. Retrieve (Getir): Kullanıcının sorusuyla ilgili metin parçalarını bir veri kaynağından (veritabanı, doküman koleksiyonu) bulur.
+2. Augment (Zenginleştir): Bulunan bu metinleri, modele gönderilecek soruya ek bağlam olarak ekler.
+3. Generate (Üret): Model, hem kendi bilgisini hem de sağlanan bağlamı kullanarak bir cevap üretir.
+
+RAG'ın en büyük avantajı, modelin cevaplarını gerçek kaynaklara dayandırması, böylece hem daha doğru hem de kaynak gösterilebilir cevaplar üretmesidir. Ayrıca model yeniden eğitilmeden, sadece veri kaynağı güncellenerek modelin "bilgisi" güncel tutulabilir.
+
+Bu proje de tam olarak bu yöntemi kullanıyor: kullanıcı bir soru sorduğunda, sistem önce ilgili doküman parçalarını buluyor, sonra bunları yerel bir dil modeline vererek cevap üretiyor.
