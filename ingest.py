@@ -1,62 +1,99 @@
-import os
+"""
+ingest.py - Doküman İşleme Scripti
+
+'documents' klasöründeki .txt dosyalarını okur, paragraflara böler,
+her paragrafı embedding modeliyle (qwen3-embedding-0.6b) vektöre
+çevirir ve SQLite veritabanına (knowledge.db) kaydeder.
+
+Bu script sadece bir kez, ya da dokümanlar değiştiğinde çalıştırılmalıdır.
+"""
+
 import json
+import os
 import sqlite3
+
 from foundry_local_sdk import Configuration, FoundryLocalManager
 
-DOCS_FOLDER = "documents" # sabit tanımlamalr bunlar 
-DB_FILE = "knowledge.db"  # veri tabanının ismi bu 
-  
-# 1. Foundry Local'ı başlat
-config = Configuration(app_name="local_rag_assistant")
-FoundryLocalManager.initialize(config)
-manager = FoundryLocalManager.instance
+DOCS_FOLDER = "documents"
+DB_FILE = "knowledge.db"
 
-# 2. Embedding modelini yükle
-embedding_model = manager.catalog.get_model("qwen3-embedding-0.6b")
-embedding_model.download(lambda p: print(f"\rEmbedding modeli indiriliyor: {p:.1f}%", end="", flush=True))
-print()
-embedding_model.load()
-embedding_client = embedding_model.get_embedding_client()
-
-# 3. Veritabanını oluştur (yoksa)
-conn = sqlite3.connect(DB_FILE)   #IF NOT EXISTS demek, "tablo zaten varsa hata verme, sadece atla" demek 
-cursor = conn.cursor()
-cursor.execute("""  
-CREATE TABLE IF NOT EXISTS documents (     
+CREATE_TABLE_SQL = """
+CREATE TABLE IF NOT EXISTS documents (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     source TEXT,
     content TEXT,
     embedding TEXT
 )
-""")
-conn.commit()
+"""
 
-# 4. documents klasöründeki her dosyayı oku ve işle
-for filename in os.listdir(DOCS_FOLDER):   #os.listdir(...), bir klasördeki tüm dosya isimlerini listeler.
-    if not filename.endswith(".txt"):  #Eğer dosya .txt ile bitmiyorsa (örnek: gizli sistem dosyaları), o dosyayı atla (continue = "bu döngü adımını geç, bir sonrakine geç").
-        continue
 
-    filepath = os.path.join(DOCS_FOLDER, filename)
-    with open(filepath, "r", encoding="utf-8") as f:
-        text = f.read()
+def load_embedding_model():
+    """Foundry Local'ı başlatır ve embedding modelini yükler."""
+    config = Configuration(app_name="local_rag_assistant")
+    FoundryLocalManager.initialize(config)
+    manager = FoundryLocalManager.instance
 
-    # Metni paragraflara böl (boş satırla ayrılmış bloklar = ayrı chunk)
-    chunks = [c.strip() for c in text.split("\n\n") if c.strip()]
+    embedding_model = manager.catalog.get_model("qwen3-embedding-0.6b")
+    embedding_model.download(
+        lambda p: print(f"\rEmbedding modeli indiriliyor: {p:.1f}%", end="", flush=True)
+    )
+    print()
+    embedding_model.load()
 
-    print(f"{filename}: {len(chunks)} parça bulundu")
+    return embedding_model
 
-    for chunk in chunks:
-        result = embedding_client.generate_embedding(chunk)
-        embedding_vector = result.data[0].embedding
-        embedding_json = json.dumps(embedding_vector)
 
-        cursor.execute(
-            "INSERT INTO documents (source, content, embedding) VALUES (?, ?, ?)",
-            (filename, chunk, embedding_json)
-        )
+def create_database(db_file):
+    """Veritabanı bağlantısını açar ve documents tablosunu oluşturur (yoksa)."""
+    conn = sqlite3.connect(db_file)
+    cursor = conn.cursor()
+    cursor.execute(CREATE_TABLE_SQL)
+    conn.commit()
+    return conn, cursor
 
-conn.commit()
-conn.close()
-embedding_model.unload()
 
-print("Tüm dokümanlar başarıyla veritabanına kaydedildi!")
+def split_into_chunks(text):
+    """Metni boş satırla ayrılmış paragraflara (chunk) böler."""
+    return [c.strip() for c in text.split("\n\n") if c.strip()]
+
+
+def ingest_documents(docs_folder, cursor, embedding_client):
+    """documents klasöründeki her .txt dosyasını okuyup veritabanına kaydeder."""
+    for filename in os.listdir(docs_folder):
+        if not filename.endswith(".txt"):
+            continue
+
+        filepath = os.path.join(docs_folder, filename)
+        with open(filepath, "r", encoding="utf-8") as f:
+            text = f.read()
+
+        chunks = split_into_chunks(text)
+        print(f"{filename}: {len(chunks)} parça bulundu")
+
+        for chunk in chunks:
+            result = embedding_client.generate_embedding(chunk)
+            embedding_json = json.dumps(result.data[0].embedding)
+
+            cursor.execute(
+                "INSERT INTO documents (source, content, embedding) VALUES (?, ?, ?)",
+                (filename, chunk, embedding_json),
+            )
+
+
+def main():
+    embedding_model = load_embedding_model()
+    embedding_client = embedding_model.get_embedding_client()
+
+    conn, cursor = create_database(DB_FILE)
+
+    try:
+        ingest_documents(DOCS_FOLDER, cursor, embedding_client)
+        conn.commit()
+        print("Tüm dokümanlar başarıyla veritabanına kaydedildi!")
+    finally:
+        conn.close()
+        embedding_model.unload()
+
+
+if __name__ == "__main__":
+    main()

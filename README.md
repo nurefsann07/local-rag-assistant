@@ -84,10 +84,11 @@ Kullanılan kaynaklar:
 ```
 local-rag-assistant/
 ├── documents/              # Kaynak dokümanlar (8 adet .txt dosyası)
+├── dev-tools/               # Geliştirme sürecinde kullanılan test scriptleri
+│   ├── retrieve.py           # Retrieval fonksiyonlarını test eden script
+│   └── check_db.py           # Veritabanını doğrulama scripti
 ├── ingest.py                # Dokümanları işleyip veritabanına kaydeden script
-├── retrieve.py               # Retrieval fonksiyonlarını test eden script
 ├── app.py                    # Ana uygulama (chat arayüzü)
-├── check_db.py                # Veritabanını doğrulama scripti
 ├── knowledge.db                # SQLite veritabanı (embedding'ler burada)
 └── README.md
 ```
